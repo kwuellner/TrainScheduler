@@ -8,7 +8,8 @@
     <title>Train Scheduler</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    </script>
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
@@ -21,67 +22,94 @@
             <h1 class="display-4">Train Schedule</h1>
             <p class="lead">“The only way of catching a train I have ever discovered is to miss the train before.”
                 ― G.K. Chesterton</p>
+            <h3 id="current-time">Current Time: </h3>
         </div>
     </div>
+    </div>
+    </div>
+    <div class="col-md-8">
+        <table class="table table-bordered table-hover">
 
-    <table class="table table-bordered table-striped">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Train Name</th>
-                <th scope="col">Destination</th>
-                <th scope="col">First Train Time</th>
-                <th scope="col">Frequency (min)</th>
-                <th scope="col">Next Arrival</th>
-                <th scope="col">Minutes Away</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" id="train-name">Train Name</th>
+                    <th scope="col" id="destination">Destination</th>
+                    <th scope="col" id="first-train">First Train Time</th>
+                    <th scope="col" id="frequency">Frequency (min)</th>
+                    <th scope="col" id="next-arrival">Next Arrival</th>
+                    <th scope="col" id="min-away">Minutes Away</th>
+                    <th scope="col" id="remove">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row"></th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th scope="row"></th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th scope="row"></th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th scope="row"></th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th scope="row"></th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
 
     <form>
-        <div class="form-group">
-            <label for="trainName">Train Name</label>
-            <input type="name" class="form-control" id="exampleInputTrainName" aria-describedby="" placeholder="">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    Featured
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="trainName">Train Name</label>
+                    <input type="name" class="form-control" id="exampleInputTrainName" aria-describedby=""
+                        placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="Destination">Destination</label>
+                    <input type="name" class="form-control" id="exampleInputDestination" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="firstTrain">First Train Time (military time)</label>
+                    <input type="name" class="form-control" id="exampleInputFirstTrain" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="trainFrequency">Frequency(min)</label>
+                    <input type="name" class="form-control" id="exampleInputFrequency" placeholder="">
+                </div>
+                <button type="submit" id="add-train" class="btn btn-secondary">Submit</button>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="Destination">Destination</label>
-            <input type="name" class="form-control" id="exampleInputDestination" placeholder="">
-        </div>
-        <div class="form-group">
-            <label for="firstTrain">First Train Time (military time)</label>
-            <input type="name" class="form-control" id="exampleInputFirstTrain" placeholder="">
-        </div>
-        <div class="form-group">
-            <label for="trainFrequency">Frequency(min)</label>
-            <input type="name" class="form-control" id="exampleInputFrequency" placeholder="">
-        </div>
-        <button type="submit" class="btn btn-secondary">Submit</button>
     </form>
 
 
     <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-    <script src="assets/javascript/train.js"></script>
+    <script src="javascript/train.js"></script>
 </body>
 
 </html>
