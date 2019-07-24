@@ -27,84 +27,59 @@
     </div>
     </div>
     </div>
-    <div class="col-md-8">
-        <table class="table table-bordered table-hover">
+    <div class="row">
+        <div class="col-md-8">
+            <table class="table table-bordered table-hover">
 
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col" id="train-name">Train Name</th>
-                    <th scope="col" id="destination">Destination</th>
-                    <th scope="col" id="first-train">First Train Time</th>
-                    <th scope="col" id="frequency">Frequency (min)</th>
-                    <th scope="col" id="next-arrival">Next Arrival</th>
-                    <th scope="col" id="min-away">Minutes Away</th>
-                    <th scope="col" id="remove">Delete</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col" id="train-name">Train Name</th>
+                        <th scope="col" id="destination">Destination</th>
+                        <th scope="col" id="frequency">Frequency (min)</th>
+                        <th scope="col" id="next-arrival">Next Arrival</th>
+                        <th scope="col" id="min-away">Minutes Away</th>
 
-        </table>
+                    </tr>
+                </thead>
+                <tbody id="add-row">
+
+
+                </tbody>
+
+            </table>
+        </div>
     </div>
 
     <form>
-        <div class="col-md-3">
-            <div class="card">
-                <div class="card-header bg-dark text-white">
-                    Featured
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-header bg-dark text-white">
+                        Featured
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="trainName">Train Name</label>
+                        <input type="name" class="form-control" id="inputName" aria-describedby="" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="Destination">Destination</label>
+                        <input type="name" class="form-control" id="inputDestination" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="firstTrain">First Train Time (military time)</label>
+                        <input type="name" class="form-control" id="first-train" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="trainFrequency">Frequency(min)</label>
+                        <input type="name" class="form-control" id="inputFrequency" placeholder="">
+                    </div>
+                    <button type="submit" id="add-train" class="btn btn-secondary">Submit</button>
                 </div>
-                <br>
-                <div class="form-group">
-                    <label for="trainName">Train Name</label>
-                    <input type="name" class="form-control" id="exampleInputTrainName" aria-describedby=""
-                        placeholder="">
-                </div>
-                <div class="form-group">
-                    <label for="Destination">Destination</label>
-                    <input type="name" class="form-control" id="exampleInputDestination" placeholder="">
-                </div>
-                <div class="form-group">
-                    <label for="firstTrain">First Train Time (military time)</label>
-                    <input type="name" class="form-control" id="exampleInputFirstTrain" placeholder="">
-                </div>
-                <div class="form-group">
-                    <label for="trainFrequency">Frequency(min)</label>
-                    <input type="name" class="form-control" id="exampleInputFrequency" placeholder="">
-                </div>
-                <button type="submit" id="add-train" class="btn btn-secondary">Submit</button>
             </div>
         </div>
     </form>
+
 
 
     <script src="https://code.jquery.com/jquery-3.4.1.js"

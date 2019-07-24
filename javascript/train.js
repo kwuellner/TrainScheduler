@@ -17,11 +17,10 @@ $("#current-time").append(moment().format("h:mm:ss a"))
 
 var trainName = "";
 var destination = "";
-var fristTrain = "";
+var firstTrain = "";
 var frequency = "";
 var arrival = "";
 var minAway = "";
-var removeTrain = "";
 
 // button to add
 $("#add-train").on("click", function (event) {
@@ -30,39 +29,61 @@ $("#add-train").on("click", function (event) {
     // var for user inputs
     trainName = $("#train-name").val().trim();
     destination = $("#destination").val().trim();
-    fristTrain = moment($("#first-train").val().trim(), "HH:mm").subtract(1, "years");
+    firstTrain = $("#first-train").val().trim();
     frequency = $("#frequency").val().trim();
     arrival = $("#next-arrival").val().trim();
     minAway = $("#min-away").val().trim();
-    removeTrain = $("#remove").val().trim();
+
+    console.log(trainName);
+    console.log(destination);
+    console.log(firstTrain);
+    console.log(frequency);
+    console.log(arrival);
+    console.log(minAway);
+
 
     // changes to firebase data
-    database.ref().set({
+    database.ref().push({
         trainName: trainName,
         destination: destination,
-        fristTrain: fristTrain,
+        firstTrain: firstTrain,
         frequency: frequency,
         arrival: arrival,
         minAway: minAway,
-        removeTrain: removeTrain,
     });
+
+
+    // logging data out of snapshot
+    database.ref().on("child_added", function (snapshot) {
+        console.log(snapshot.val());
+        console.log(snapshot.val().inputName);
+        console.log(snapshot.val().inputDestination);
+        console.log(snapshot.val().fristTrain);
+        console.log(snapshot.val().inputFrequency);
+        console.log(snapshot.val().arrival);
+        console.log(snapshot.val().minAway);
+
+        var newRow = $("<tr>");
+        newRow.append($("<td>" + snapshot.val().inputName + "</td>"));
+        newRow.append($("<td>" + snapshot.val().inputDestination + "</td>"));
+        newRow.append($("<td>" + snapshot.val().inputFrequency + "</td>"));
+        newRow.append($("<td>" + snapshot.val().arrival + "</td>"));
+        newRow.append($("<td>" + snapshot.val().minAway + "</td>"));
+
+
+        $("#add-row").append(newRow);
+
+
+    }, function (errorObject) {
+        console.log("Errors handled: " + errorObject.code);
+    })
 
 });
 
-// printing changes to data
-database.ref().on("value", function (snapshot) {
-    console.log(snapshot.val());
-    console.log(snapshot.val().trainName);
-    console.log(snapshot.val().destination);
-    console.log(snapshot.val().fristTrain);
-    console.log(snapshot.val().frequency);
-    console.log(snapshot.val().arrival);
-    console.log(snapshot.val().minAway);
+var firstTimeConverted = moment(firstTrain, "HH:mm").subtract(1, "years");
+console.log(firstTimeConverted);
 
-
-})
-
-
-
-
-
+var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+var tRemainder = diffTime % frequency;
+var tMinutesTillTrain = frequency - tRemainder;
+var nextTrain = moment().add(tMinutesTillTrain, "minutes");
