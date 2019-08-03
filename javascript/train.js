@@ -2,9 +2,11 @@
 // firebase config/initialize
 var config = {
     apiKey: "AIzaSyCrLAgvgsTOfPgq4eiotuSZxRIehEkOu5Y",
-    authDomain: "trainscheduler-540ec.firebaseio.com/",
-    databaseURL: "https://trainscheduler-540ec.firebaseio.com/",
-    storageBucket: "gs://trainscheduler-540ec.appspot.com"
+    authDomain: "trainscheduler-540ec.firebaseio.com",
+    databaseURL: "https://trainscheduler-540ec.firebaseio.com",
+    projectId: "trainscheduler-540ec",
+    storageBucket: "trainscheduler-540ec.appspot.com",
+    messagingSenderId: "204735844511",
 };
 
 firebase.initializeApp(config);
@@ -31,7 +33,7 @@ $("#add-train").on("click", function (event) {
     destination = $("#destination").val().trim();
     firstTrain = $("#first-train").val().trim();
     frequency = $("#frequency").val().trim();
-    arrival = $("#next-arrival").val().trim();
+    arrival = $("#arrival").val().trim();
     minAway = $("#min-away").val().trim();
 
     console.log(trainName);
@@ -53,20 +55,27 @@ $("#add-train").on("click", function (event) {
     });
 
 
+
     // logging data out of snapshot
     database.ref().on("child_added", function (snapshot) {
         console.log(snapshot.val());
-        console.log(snapshot.val().inputName);
-        console.log(snapshot.val().inputDestination);
-        console.log(snapshot.val().fristTrain);
-        console.log(snapshot.val().inputFrequency);
+        console.log(snapshot.val().trainName);
+        console.log(snapshot.val().destination);
+        console.log(snapshot.val().firstTrain);
+        console.log(snapshot.val().frequency);
         console.log(snapshot.val().arrival);
         console.log(snapshot.val().minAway);
 
+        var firstTimeConverted = moment(firstTrain, "HH:mm").subtract(1, "years");
+        var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+        var remainder = diffTime % frequency;
+        var minAway = frequency - remainder;
+        var arrival = moment().add(minAway, "minutes").format("hh:mm A");
+
         var newRow = $("<tr>");
-        newRow.append($("<td>" + snapshot.val().inputName + "</td>"));
-        newRow.append($("<td>" + snapshot.val().inputDestination + "</td>"));
-        newRow.append($("<td>" + snapshot.val().inputFrequency + "</td>"));
+        newRow.append($("<td>" + snapshot.val().trainName + "</td>"));
+        newRow.append($("<td>" + snapshot.val().destination + "</td>"));
+        newRow.append($("<td>" + snapshot.val().frequency + "</td>"));
         newRow.append($("<td>" + snapshot.val().arrival + "</td>"));
         newRow.append($("<td>" + snapshot.val().minAway + "</td>"));
 
@@ -74,16 +83,13 @@ $("#add-train").on("click", function (event) {
         $("#add-row").append(newRow);
 
 
-    }, function (errorObject) {
-        console.log("Errors handled: " + errorObject.code);
-    })
+    },
+        function (errorObject) {
+            console.log("Errors handled: " + errorObject.code);
+        })
+
+
+
 
 });
 
-var firstTimeConverted = moment(firstTrain, "HH:mm").subtract(1, "years");
-console.log(firstTimeConverted);
-
-var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
-var tRemainder = diffTime % frequency;
-var tMinutesTillTrain = frequency - tRemainder;
-var nextTrain = moment().add(tMinutesTillTrain, "minutes");
