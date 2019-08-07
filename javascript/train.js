@@ -43,6 +43,13 @@ $("#add-train").on("click", function (event) {
     console.log(arrival);
     console.log(minAway);
 
+    var firstTimeConverted = moment(firstTrain, "HH:mm").subtract(1, "years");
+    var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+    var remainder = diffTime % frequency;
+    minAway = frequency - remainder;
+    arrival = moment().add(minAway, "minutes").format("hh:mm A");
+
+
 
     // changes to firebase data
     database.ref().push({
@@ -66,11 +73,6 @@ $("#add-train").on("click", function (event) {
         console.log(snapshot.val().arrival);
         console.log(snapshot.val().minAway);
 
-        var firstTimeConverted = moment(firstTrain, "HH:mm").subtract(1, "years");
-        var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
-        var remainder = diffTime % frequency;
-        var minAway = frequency - remainder;
-        var arrival = moment().add(minAway, "minutes").format("hh:mm A");
 
         var newRow = $("<tr>");
         newRow.append($("<td>" + snapshot.val().trainName + "</td>"));
