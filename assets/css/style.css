@@ -1,3 +1,23 @@
+body {
+
+}
+
+.jumbotron {
+    background-image:url(../images/railroad-railway-train-1793503.jpg);
+    max-width: 100%;
+    background-size: 25%;
+    background-repeat: no-repeat;
+}
+
+.display-4 {
+    text-align: center;
+}
+
+.lead {
+    text-align: right;
+}
+
+
 #input {
     float: right;
     margin-left: 50%;
